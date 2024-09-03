@@ -22,7 +22,6 @@ def redirect_links(code):
 class Links(Resource):
     def post(self):
         data = request.json
-        print(data)
         origin_link = data.get('origin_link')
         link = Link.link_generation(origin_link)
         host = request.host
@@ -37,7 +36,6 @@ class Links(Resource):
                 return {'error': 'link not found'}, 404
             return {'link': link.original_link}
         id_lst = data.get('id_lst')
-        print(id_lst)
         links = Link.get_links_by_id(id_lst)
         host = request.host
         links = [link.to_json(host) for link in links]
